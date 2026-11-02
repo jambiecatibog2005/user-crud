@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Add a Book</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add a Book</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="page-shell">
+    <p class="eyebrow">PERSONAL LIBRARY</p>
+    <h1>Build your collection</h1>
+    <p class="intro">Record a book once, then manage its details from the library tab.</p>
+
+    <ion-list inset="true">
+      <ion-item>
+        <ion-input label="Title *" labelPlacement="stacked" placeholder="e.g. The Hobbit" [(ngModel)]="newBook.title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Author *" labelPlacement="stacked" placeholder="e.g. J.R.R. Tolkien" [(ngModel)]="newBook.author"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-select label="Category *" labelPlacement="stacked" [(ngModel)]="newBook.category">
+          <ion-select-option value="Fiction">Fiction</ion-select-option>
+          <ion-select-option value="Non-fiction">Non-fiction</ion-select-option>
+          <ion-select-option value="Science">Science</ion-select-option>
+          <ion-select-option value="History">History</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" label="Publication year" labelPlacement="stacked" [(ngModel)]="newBook.year"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-toggle [(ngModel)]="newBook.available">Available to borrow</ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" size="large" (click)="addBook()">
+      <ion-icon name="add-outline" slot="start"></ion-icon>
+      Add book
+    </ion-button>
+  </div>
+</ion-content>

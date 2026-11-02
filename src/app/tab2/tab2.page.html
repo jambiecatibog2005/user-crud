@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>My Library</ion-title>
+    <ion-buttons slot="end">
+      <ion-button aria-label="Refresh books" (click)="reloadBooks()">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">My Library</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="page-shell">
+    <p class="eyebrow">YOUR COLLECTION</p>
+    <h1>Library</h1>
+    <ion-searchbar [(ngModel)]="searchTerm" placeholder="Search title, author, or category" animated="true"></ion-searchbar>
+    <ion-segment [(ngModel)]="selectedCategory" scrollable="true">
+      <ion-segment-button *ngFor="let category of categories" [value]="category">
+        <ion-label>{{ category }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-note *ngIf="loadError" color="danger">
+      Hindi ma-load ang books. I-check ang Firestore read permissions.
+    </ion-note>
+
+    <ion-list *ngIf="filteredBooks.length; else emptyState" inset="true">
+      <ion-item-sliding *ngFor="let book of filteredBooks">
+        <ion-item>
+          <ion-label>
+            <h2>{{ book.title }}</h2>
+            <p>{{ book.author }} · {{ book.year }} · {{ book.category }}</p>
+          </ion-label>
+          <ion-badge slot="end" [color]="book.available ? 'success' : 'medium'">{{ book.available ? 'Available' : 'Borrowed' }}</ion-badge>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="primary" (click)="editBook(book)">
+            <ion-icon slot="top" name="create-outline"></ion-icon> Edit
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="deleteBook(book)">
+            <ion-icon slot="top" name="trash-outline"></ion-icon> Delete
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <ion-icon name="library-outline"></ion-icon>
+        <h2>No books found</h2>
+        <p>Add a book in the first tab or change your search.</p>
+      </div>
+    </ng-template>
+  </div>
+</ion-content>

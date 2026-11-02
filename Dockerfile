@@ -4,7 +4,6 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-# Palitan natin ang npm ci ng npm install para iwas lockfile mismatch
 RUN npm install --no-audit --prefer-offline
 
 COPY . .
@@ -18,4 +17,4 @@ COPY --from=build /app/www /usr/share/nginx/html
 
 EXPOSE 8100
 
-CMD ["nginx", "-g", "daemon off;"] 
+CMD ["nginx", "-g", "daemon off;"]

@@ -18,4 +18,4 @@ COPY --from=build /app/www /usr/share/nginx/html
 
 EXPOSE 8100
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"] 

@@ -33,7 +33,7 @@
     <ion-list *ngIf="filteredBooks.length; else emptyState" inset="true">
       <ion-item-sliding *ngFor="let book of filteredBooks">
         <ion-item>
-          <ion-label>
+          <ion-label> 
             <h2>{{ book.title }}</h2>
             <p>{{ book.author }} · {{ book.year }} · {{ book.category }}</p>
           </ion-label>
